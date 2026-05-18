@@ -491,6 +491,10 @@ function solve_system(::Any, LHS, RHS, iterative)
     if iterative
         IterativeSolvers.lsqr(LHS, RHS)
     else
+        const DEFAULT_KKT_REGULARIZATION = 1e-5
+        if DEFAULT_KKT_REGULARIZATION > 0
+            LHS = LHS + DEFAULT_KKT_REGULARIZATION * sparse(I, size(LHS, 1), size(LHS, 2))
+        end
         LHS \ RHS
     end
 end
