@@ -494,7 +494,7 @@ function solve_system(::Any, LHS, RHS, iterative)
         const DEFAULT_KKT_REGULARIZATION = 1e-5
         if DEFAULT_KKT_REGULARIZATION > 0
             n, m = size(LHS)
-            LHS = LHS + DEFAULT_KKT_REGULARIZATION * SparseArrays.spdiagm(0 => fill(eps, n))
+            LHS = LHS + DEFAULT_KKT_REGULARIZATION * SparseArrays.spdiagm(0 => fill(DEFAULT_KKT_REGULARIZATION, n))
         end
         LHS \ RHS
     end
